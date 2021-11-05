@@ -7,13 +7,18 @@ use serenity::model::guild::Guild;
 use serenity::model::interactions::{Interaction, InteractionResponseType, InteractionType};
 
 use crate::commands;
+use crate::db::dbclient::DBClient;
 use crate::runtime::get_logger;
 
-pub struct BotHandler {}
+pub struct BotHandler {
+    db_client: DBClient,
+}
 
 impl BotHandler {
-    pub fn new() -> Self {
-        Self {}
+    pub fn new(db_client: DBClient) -> Self {
+        Self {
+            db_client,
+        }
     }
 }
 
