@@ -1,4 +1,4 @@
-use rspotify::{ClientCredsSpotify, Credentials};
+use rspotify::{ClientCredsSpotify, Config, Credentials};
 
 pub struct SpotifyClient {
     client: ClientCredsSpotify,
@@ -6,7 +6,10 @@ pub struct SpotifyClient {
 
 impl SpotifyClient {
     pub async fn new(id: &str, secret: &str) -> anyhow::Result<Self> {
-        let mut spotify = ClientCredsSpotify::new(Credentials::new(&id, &secret));
+        let mut cfg = Config::default();
+        cfg.token_refreshing = true;
+
+        let mut spotify = ClientCredsSpotify::with_config(Credentials::new(&id, &secret), cfg);
         spotify.request_token().await?;
 
         Ok(Self {

@@ -192,7 +192,7 @@ pub async fn monitor(ctx: Context, interaction: ApplicationCommandInteraction) -
     interaction.create_followup_message(ctx.http, |r| r.create_embed(|e| {
         e.author(|a| {
             a.name("Spotlit");
-            a.icon_url("https://i.imgur.com/sNciPWx.png");
+            a.icon_url("https://i.imgur.com/iKUvWHR.png");
 
             a
         });

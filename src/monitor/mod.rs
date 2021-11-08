@@ -96,6 +96,8 @@ pub async fn worker(db: Arc<DBClient>, spotify: Arc<SpotifyClient>, http_ref: Ar
 }
 
 async fn scan_artist(db: &Arc<DBClient>, spotify: &Arc<SpotifyClient>, id: &str) -> anyhow::Result<()> {
+    spotify.conn().auto_reauth().await?;
+
     let artist = ArtistId::from_id(id)?;
 
     let albums = spotify.conn().artist_albums_manual(
@@ -172,7 +174,7 @@ async fn process_unalerted_watches(db: &Arc<DBClient>, http_ref: &Arc<Mutex<Opti
             c.embed(|e| {
                 e.author(|a| {
                     a.name("Spotlit");
-                    a.icon_url("https://i.imgur.com/sNciPWx.png");
+                    a.icon_url("https://i.imgur.com/iKUvWHR.png");
 
                     a
                 });
